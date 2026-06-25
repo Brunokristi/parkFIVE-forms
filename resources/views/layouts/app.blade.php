@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'parkFIVE') — Online check-in</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('logo.svg') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+<body class="min-h-screen bg-white text-slate-800 antialiased">
     <div class="min-h-screen flex flex-col">
-        <header class="bg-white border-b border-slate-200">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-between">
+        <header class="items-center flex justify-center ">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between">
                 <div class="flex items-center gap-2">
-                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-slate-900 text-white font-semibold tracking-tight">p5</span>
-                    <span class="text-lg font-semibold tracking-tight text-slate-900">parkFIVE</span>
+                    <img src="{{ asset('logo.svg') }}" alt="parkFIVE logo" class="h-10 ">
+                    <span class="font-lato text-park-gray">parkFIVE</span>
                 </div>
-                <span class="text-sm text-slate-500">@yield('header-sub', 'Online check-in')</span>
             </div>
         </header>
 
@@ -27,8 +28,8 @@
             </div>
         </main>
 
-        <footer class="border-t border-slate-200 bg-white">
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 py-6 text-center text-sm text-slate-400">
+        <footer class="bg-park-green">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 py-6 text-center text-sm text-white">
                 &copy; {{ date('Y') }} parkFIVE — Online self check-in
             </div>
         </footer>
