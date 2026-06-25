@@ -27,22 +27,12 @@
 <form method="POST" action="{{ route('checkin.store', $apartment->slug) }}" id="checkin-form" novalidate>
     @csrf
 
-    {{-- Sekcia: Kontaktná osoba rezervácie --}}
+    {{-- Sekcia: Kontakt --}}
     <section class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
         <div class="px-5 sm:px-6 py-4 border-b border-slate-100">
-            <h2 class="text-base font-semibold text-slate-900">Kontaktná osoba rezervácie</h2>
+            <h2 class="text-base font-semibold text-slate-900">Kontakt</h2>
         </div>
         <div class="p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-                <label for="contact_first_name" class="block text-sm font-medium text-slate-700 mb-1.5">Meno <span class="text-red-500">*</span></label>
-                <input type="text" name="contact_first_name" id="contact_first_name" value="{{ old('contact_first_name') }}" class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition @error('contact_first_name') border-red-400 focus:border-red-500 focus:ring-red-500/10 @enderror" placeholder="Ján" autocomplete="given-name">
-                @error('contact_first_name') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
-            </div>
-            <div>
-                <label for="contact_last_name" class="block text-sm font-medium text-slate-700 mb-1.5">Priezvisko <span class="text-red-500">*</span></label>
-                <input type="text" name="contact_last_name" id="contact_last_name" value="{{ old('contact_last_name') }}" class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition @error('contact_last_name') border-red-400 focus:border-red-500 focus:ring-red-500/10 @enderror" placeholder="Kováč" autocomplete="family-name">
-                @error('contact_last_name') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
-            </div>
             <div>
                 <label for="contact_email" class="block text-sm font-medium text-slate-700 mb-1.5">E-mail <span class="text-red-500">*</span></label>
                 <input type="email" name="contact_email" id="contact_email" value="{{ old('contact_email') }}" class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 outline-none transition @error('contact_email') border-red-400 focus:border-red-500 focus:ring-red-500/10 @enderror" placeholder="jan.kovac@example.com" autocomplete="email">

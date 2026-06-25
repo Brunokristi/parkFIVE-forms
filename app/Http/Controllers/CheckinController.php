@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CheckinConfirmationMail;
+use App\Mail\CheckinNotificationMail;
 use App\Models\Apartment;
 use App\Models\Checkin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -19,8 +22,6 @@ class CheckinController extends Controller
     public function store(Request $request, Apartment $apartment): RedirectResponse
     {
         $validated = $request->validate([
-            'contact_first_name' => ['required', 'string', 'max:100'],
-            'contact_last_name' => ['required', 'string', 'max:100'],
             'contact_email' => ['required', 'email', 'max:150'],
             'contact_phone' => ['required', 'string', 'max:50'],
             'guest_count' => ['required', 'integer', 'min:1', 'max:8'],
@@ -38,8 +39,6 @@ class CheckinController extends Controller
         ]);
 
         $checkin = $apartment->checkins()->create([
-            'contact_first_name' => $validated['contact_first_name'],
-            'contact_last_name' => $validated['contact_last_name'],
             'contact_email' => $validated['contact_email'],
             'contact_phone' => $validated['contact_phone'],
             'guest_count' => $validated['guest_count'],
@@ -58,6 +57,17 @@ class CheckinController extends Controller
                 'last_name' => $guest['last_name'],
                 'birth_date' => $guest['birth_date'],
             ]);
+        }
+
+        $checkin->load(['apartment', 'guests']);
+
+        // E-mail hosťovi — príchodové informácie
+        Mail::to($checkin->contact_email)->send(new CheckinConfirmationMail($checkin));
+
+        // E-mail ubytovateľovi — notifikácia o novom check-ine
+        $ownerEmail = config('mail.owner_email');
+        if ($ownerEmail) {
+            Mail::to($ownerEmail)->send(new CheckinNotificationMail($checkin));
         }
 
         return redirect()->route('checkin.thankyou', ['checkin' => $checkin->id])

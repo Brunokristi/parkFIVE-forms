@@ -99,6 +99,9 @@ php artisan db:seed --class=ApartmentSeeder
 app/
 ├── Http/Controllers/
 │   └── CheckinController.php      # Logika formulára a potvrdenia
+├── Mail/
+│   ├── CheckinConfirmationMail.php # E-mail pre hosťa
+│   └── CheckinNotificationMail.php # E-mail pre ubytovateľa
 └── Models/
     ├── Apartment.php
     ├── Checkin.php
@@ -119,6 +122,9 @@ resources/views/
 ├── checkin/
 │   ├── form.blade.php             # Check-in formulár
 │   └── thankyou.blade.php         # Potvrdzovacia stránka s informáciami
+├── emails/
+│   ├── checkin-confirmation.blade.php  # E-mail hosťovi
+│   └── checkin-notification.blade.php  # E-mail ubytovateľovi
 └── welcome.blade.php              # Landing stránka
 
 routes/
@@ -134,3 +140,40 @@ routes/
 - **Zdieľať informácie** — použije Web Share API ak je dostupné, inak skopíruje do schránky.
 - **Success/error hlášky** — vizuálne upozornenia na úspech/chybu.
 - **Responsive dizajn** — optimalizované pre mobil aj desktop.
+
+## E-mailové notifikácie
+
+Po úspešnom odoslaní formulára sa odošlú dva e-maily:
+
+1. **Hosťovi** (`contact_email`) — príchodové informácie a prístupový kód (`CheckinConfirmationMail`)
+2. **Ubytovateľovi** (`OWNER_EMAIL`) — notifikácia o novom check-ine so všetkými údajmi (`CheckinNotificationMail`)
+
+### Konfigurácia e-mailu
+
+V `.env` nastav:
+
+```env
+# E-mail ubytovateľa pre notifikácie
+OWNER_EMAIL=info@parkfive.sk
+
+# SMTP nastavenie (pre reálne odosielanie)
+MAIL_MAILER=smtp
+MAIL_HOST=tvoj-smtp-server.sk
+MAIL_PORT=587
+MAIL_USERNAME=tvoj-email@parkfive.sk
+MAIL_PASSWORD=tvoje-heslo
+MAIL_FROM_ADDRESS="noreply@parkfive.sk"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+> **Poznámka:** V predvolenom nastavení je `MAIL_MAILER=log`, čo znamená, že e-maily sa len zapisujú do logu (`storage/logs/laravel.log`) a reálne sa neodosielajú. Pre produkciu zmeň na `smtp` a nastav SMTP údaje.
+
+### Mailable triedy
+
+- `app/Mail/CheckinConfirmationMail.php` — e-mail pre hosťa
+- `app/Mail/CheckinNotificationMail.php` — e-mail pre ubytovateľa
+
+### E-mailové šablóny
+
+- `resources/views/emails/checkin-confirmation.blade.php` — šablóna pre hosťa
+- `resources/views/emails/checkin-notification.blade.php` — šablóna pre ubytovateľa

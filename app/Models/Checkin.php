@@ -10,8 +10,6 @@ class Checkin extends Model
 {
     protected $fillable = [
         'apartment_id',
-        'contact_first_name',
-        'contact_last_name',
         'contact_email',
         'contact_phone',
         'guest_count',

@@ -115,4 +115,16 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Owner Notification Email
+    |--------------------------------------------------------------------------
+    |
+    | E-mailová adresa ubytovateľa, na ktorú sa odošle notifikácia
+    | o každom novom online check-ine.
+    |
+    */
+
+    'owner_email' => env('OWNER_EMAIL'),
+
 ];

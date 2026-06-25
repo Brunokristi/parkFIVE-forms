@@ -11,8 +11,6 @@ return new class extends Migration
         Schema::create('checkins', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apartment_id')->constrained()->cascadeOnDelete();
-            $table->string('contact_first_name');
-            $table->string('contact_last_name');
             $table->string('contact_email');
             $table->string('contact_phone');
             $table->unsignedTinyInteger('guest_count');

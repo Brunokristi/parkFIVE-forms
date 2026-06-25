@@ -1,4 +1,3 @@
-@charset('utf-8')
 <!DOCTYPE html>
 <html lang="sk">
 <head>
