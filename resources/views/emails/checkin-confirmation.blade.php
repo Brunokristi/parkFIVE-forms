@@ -195,7 +195,7 @@
                                             <tr>
                                                 <td style="background-color:#99bd99;border-radius:6px;padding:10px 12px;">
                                                     <span style="font-size:13px;font-weight:700;color:#ffffff;">
-                                                        Pri objednaní pred príchodom: 20 € / deň
+                                                        Pri objednaní pred príchodom: 30 € / deň
                                                     </span>
                                                 </td>
                                             </tr>

@@ -240,13 +240,13 @@
             <div class="mt-4 flex flex-col gap-3 sm:flex-row">
                 <div class="rounded-md border border-park-green bg-park-green px-4 py-3">
                     <p class="text-sm font-semibold text-white">
-                        Pri objednaní pred príchodom: 20 € / deň
+                        Pri objednaní pred príchodom: 30 € / deň
                     </p>
                 </div>
 
                 <div class="rounded-md border border-park-gray bg-white px-4 py-3">
                     <p class="text-sm font-semibold text-park-gray">
-                        Bežná cena: 30 € / deň
+                        Bežná cena: 40 € / deň
                     </p>
                 </div>
             </div>
